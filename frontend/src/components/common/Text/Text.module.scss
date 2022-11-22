@@ -1,0 +1,18 @@
+.text {
+  color: #333;
+
+  &_small {
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  &_medium {
+    font-weight: 500;
+    font-size: 20px;
+  }
+
+  &_large {
+    font-weight: 500;
+    font-size: 24px;
+  }
+}

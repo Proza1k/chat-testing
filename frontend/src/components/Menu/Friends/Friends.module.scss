@@ -1,0 +1,11 @@
+.friends {
+  &_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    overflow: scroll;
+    height: calc(100vh - 180px);
+  }
+}

@@ -1,0 +1,38 @@
+.friend_card {
+  width: 100%;
+  display: flex;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  box-sizing: initial;
+  position: relative;
+
+  &_active {
+    background: rgba(238, 209, 103, 0.5);
+  }
+
+  &:hover:not(&_active) {
+    background-color: #f5f5f5;
+  }
+
+  &_avatar {
+    width: 100%;
+    height: 100%;
+
+    &_container {
+      min-width: 50px;
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+  }
+
+  &_content {
+    &_container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+  }
+}
