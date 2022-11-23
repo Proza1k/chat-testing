@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { getAuthToken } from 'src/helpers/auth'
 import { GET_FRIENDS } from 'src/store/actions/friends'
 import { GET_MESSAGES } from 'src/store/actions/message'
 import { AUTH_USER } from 'src/store/actions/user'
@@ -15,7 +16,7 @@ export const useAppStartHooks = () => {
   useEffect(() => {
     const isUser = Boolean(userStore.status === Status.SUCCESS && userStore.payload)
     
-    if (!userStore.payload && userStore.status === Status.LOADING) {
+    if (!userStore.payload && userStore.status === Status.LOADING && getAuthToken()) {
       dispatch(AUTH_USER())
     }
 

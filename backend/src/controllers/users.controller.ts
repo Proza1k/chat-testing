@@ -29,7 +29,6 @@ export class UsersController {
   async getAllFriends(@Req() { user }) {
     const result = await this.usersService.getAllUsers(user.userId);
 
-    console.log(result);
     return this.responseService.success({
       payload: result,
       message: 'Users found successfully',

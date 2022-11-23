@@ -10,7 +10,7 @@ import { Logger } from '@nestjs/common';
 import { Socket, Server } from 'socket.io';
 import { MessageService } from 'src/services/message.service';
 
-@WebSocketGateway(8001, { cors: '*' })
+@WebSocketGateway(3333, { cors: '*' })
 export class SocketProvider
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
@@ -21,7 +21,7 @@ export class SocketProvider
   private logger: Logger = new Logger('AppGateway');
 
   afterInit() {
-    this.logger.log('Init');
+    this.logger.log('Socket init Done');
   }
 
   handleDisconnect(client: Socket) {

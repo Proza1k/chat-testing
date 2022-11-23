@@ -13,10 +13,11 @@ import { Button } from 'src/components/common/Button'
 import { Form } from 'src/components/common/Form'
 import { AuthFormInputs } from './types'
 import { useAppDispatch, useAppSelector } from 'src/store/hooks'
-import { LOGIN_USER } from 'src/store/actions/user'
+import { AUTH_USER, LOGIN_USER } from 'src/store/actions/user'
 import { useNavigate } from 'react-router-dom'
 import { Routes } from 'src/types/routes'
 import { socket } from 'src/services/socket'
+import { getAuthToken } from 'src/helpers/auth'
 
 export const AuthPage = () => {
   const dispatch = useAppDispatch()
@@ -28,15 +29,18 @@ export const AuthPage = () => {
 
   const onSubmitHandler = handleSubmit(
     useCallback<SubmitHandler<AuthFormInputs>>(
-      (data: AuthFormInputs) => {
+      async (data: AuthFormInputs) => {
         try {
           const responseData = {
             avatar: config,
             ...data
           }
-          dispatch(LOGIN_USER(responseData))
-          socket.emit('friends_to_server')
-          history(Routes.HOME)
+          dispatch(LOGIN_USER(responseData)).then(() => {
+            socket.emit('friends_to_server')
+            dispatch(AUTH_USER()).then(() => {
+              history(Routes.HOME)
+            })
+          })
           reset()
         } catch (error) {
           console.error(error)
@@ -52,7 +56,7 @@ export const AuthPage = () => {
 
       setConfig(newConfig)
     }
-  }, [switcherChecked, userStore.payload, config])
+  }, [switcherChecked, userStore.payload, config, dispatch])
 
   return (
     <Page className={cx(css.authPage)}>

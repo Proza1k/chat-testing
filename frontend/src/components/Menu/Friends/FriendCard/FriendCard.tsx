@@ -14,7 +14,6 @@ export const FriendCard = ({ friend }: FriendCardProps) => {
   const history = useNavigate()
 
   const onClickHandle = () => {
-    console.log(friend)
     history(`/mail/${friend._id}`)
   }
 
